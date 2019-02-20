@@ -5,7 +5,7 @@
     versionCode = "10"
     version     = "0.0.2" >
 
-  <name>MobileApp</name>
+  <name>BudgetApp</name>
 
   <description>
       An example for phonegap build mobileappv2.
