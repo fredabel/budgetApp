@@ -153,33 +153,7 @@
 					
 		// 	}
 		// });
-		$.ajax({
-
-			url: "http://localhost:8000/api/manage_users",
-			type: 'GET',
-			dataType: "json",
-			headers: {"Authorization": "Bearer " + localStorage.getItem('token')},
-			success: function(data)
-			{   
-				console.log(data);
-				// $.each(data, function(i,val){
-
-				// 	console.log(val);
-				// 	if(val['msg'] == 'Success'){
-
-				// 		window.location='content/home.html';
-
-
-				// 	}else{
-					
-				// 		alert(data);
-				// 	}
-
-				// });
-					
-			}
-		});
-
+	
 
 	});
 	
