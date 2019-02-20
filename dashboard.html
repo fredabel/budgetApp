@@ -161,10 +161,13 @@
                 url: "http://10.196.43.160:80/api/manage_users",
                 type: 'GET',
                 dataType: "json",
-                headers: {"Authorization": "Bearer " + localStorage.getItem('token')},
+                headers: {
+                    "Authorization": "Bearer " + window.localStorage.getItem('token')
+
+                },
                 success: function(data)
                 {   
-                    alert(localStorage.getItem('token'));
+                    alert(window.localStorage.getItem('token'));
 
                     var email;
                     var name;
