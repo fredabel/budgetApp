@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta  charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 		<!--Import Google Icon Font-->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -9,37 +9,38 @@
 		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 		<link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
 
-		
-	
     </head>
+    
 
     <body>
-      
-        <nav class="" role="navigation">
-            <div class="nav-wrapper ">
-                <a id="logo-container" href="dashboard.html" class="brand-logo center">
-                    Gravity
-                </a>
-                <a href="#" data-target="nav-mobile" class="left-align sidenav-trigger show-on-large"><i class=" button-collapse material-icons">menu</i></a>
-                <ul class="right">
-                    <li><a href="index.html">Logout</a></li>
-                </ul>
-    
-                <ul id="nav-mobile" class="sidenav">
-                    <li><a href="home.html">Home</a></li>
-                   
-                </ul>
-                
-            </div>
-        </nav>
+        <nav class="blue darken-4" role="navigation" data-includeHTML="includes/user-header.html"> </nav>
+        <ul id="nav-mobile" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="img/bg-user.jpeg">
+                    </div>
+                    <a href="profile.html"><img id="user-img" class="circle" src=""></a>
+                    <a href="profile.html"><span id="user-name" class="white-text name"></span></a>
+                    <a href="profile.html"><span id="user-email" class="white-text email"></span></a>
+                </div>
+            </li>
+            <li><a href="dashboard.html"><i class="material-icons">dashboard</i>Dashboard</a></li>
+            <li><a href="home.html"><i class="material-icons">home</i>Home</a></li>
+            <li><a href="#"><i class="material-icons">notifications</i>Notification <span class="new badge">4</span></a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Configuration</a></li>
+            <li><a href="#"><i class="material-icons">settings</i>Settings</a></li>
+            <li><a class="waves-effect" href="#!" id="logout"><i class="material-icons">power_settings_new</i>Logout</a></li>
+        </ul>
 		<div class="bg">
             <div class="row">
-                <div class="col s6 m6 l3 ">
+                <div class="col s6 m6 l3">
                     <div class="card center card-bg white-text transparent">
                         <div class="card-content">
                             <p>Users</p>
                             <h5>10</h5>
-                            <i class="material-icons small green-text">keyboard_arrow_up</i>
+                            <!-- <i class="material-icons small green-text">keyboard_arrow_up</i> -->
                             <b class="green-text">%12</b>
                         </div>
                     </div>
@@ -50,7 +51,6 @@
                         <div class="card-content">
                             <p>Users</p>
                             <h5>10</h5>
-                            <i class="material-icons small green-text">keyboard_arrow_up</i>
                             <b class="green-text">%12</b>
                         </div>
                     </div>
@@ -61,7 +61,6 @@
                         <div class="card-content">
                             <p>Users</p>
                             <h5>10</h5>
-                            <i class="material-icons small green-text">keyboard_arrow_up</i>
                             <b class="green-text">%12</b>
                         </div>
                     </div>
@@ -72,7 +71,6 @@
                         <div class="card-content">
                             <p>Users</p>
                             <h5>10</h5>
-                            <i class="material-icons small green-text">keyboard_arrow_up</i>
                             <b class="green-text">%12</b>
                         </div>
                     </div>
@@ -122,19 +120,38 @@
             </div>
           
                         
-		</div>
+        </div>
+        
 		
 
-	<!--JavaScript at end of body for optimized loading-->
-	
+    <!--JavaScript at end of body for optimized loading-->
     <script src="js/jquery.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
     <script src="js/chartjs/Chart.js"></script>
-
+	
+    
     <script>
         $(document).ready(function(){
+
+            $('#user-img').attr('src', 'img/'+localStorage.user_avatar);
+            $('#user-name').html(localStorage.user_name);
+            $('#user-email').html(localStorage.user_email);
+
+
+            // include header
+            $("nav[data-includeHTML]").each(function () {                
+                $(this).load($(this).attr("data-includeHTML"));
+            });
+
+            $('#logout').on('click', function(){
+                window.location='index.html';
+                localStorage.clear();
+            });
+          
             $('.carousel').carousel();
+
+            // chart
 
             var ctx = document.getElementById("myChart");
             
@@ -156,6 +173,8 @@
                 }
                 
             });
+
+            // display users
             $.ajax({
 
                 url: "http://10.196.43.160:80/api/manage_users",
@@ -167,8 +186,7 @@
                 },
                 success: function(data)
                 {   
-                    alert(localStorage.token)
-
+                  
                     var email;
                     var name;
                     var html;

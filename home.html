@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta  charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 	<title>Materialize</title>
 
@@ -11,24 +11,26 @@
 	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-	<nav class="" role="navigation">
-		<div class="nav-wrapper ">
-			<a id="logo-container" href="dashboard.html" class="brand-logo center">
-					Gravity
-			</a>
-			<a href="#" data-target="nav-mobile" class="left-align sidenav-trigger show-on-large"><i class=" button-collapse material-icons">menu</i></a>
-			<ul class="right">
-				
-				<li><a href="index.html">Logout</a></li>
-			</ul>
-
-			<ul id="nav-mobile" class="sidenav">
-				<li><a href="home.html">Home</a></li>
-				
-			</ul>
-			
-		</div>
-	</nav>
+	<nav class="blue darken-4" role="navigation" data-includeHTML="includes/user-header.html"> </nav>
+	<ul id="nav-mobile" class="sidenav">
+		<li>
+			<div class="user-view">
+				<div class="background">
+					<img src="img/bg-user.jpeg">
+				</div>
+				<a href="profile.html"><img id="user-img" class="circle" src=""></a>
+				<a href="profile.html"><span id="user-name" class="white-text name"></span></a>
+				<a href="profile.html"><span id="user-email" class="white-text email"></span></a>
+			</div>
+		</li>
+		<li><a href="dashboard.html"><i class="material-icons">dashboard</i>Dashboard</a></li>
+		<li><a href="home.html"><i class="material-icons">home</i>Home</a></li>
+		<li><a href="#"><i class="material-icons">notifications</i>Notification <span class="new badge">4</span></a></li>
+		<li><div class="divider"></div></li>
+		<li><a class="subheader">Configuration</a></li>
+		<li><a href="#"><i class="material-icons">settings</i>Settings</a></li>
+		<li><a class="waves-effect" href="#!" id="logout"><i class="material-icons">power_settings_new</i>Logout</a></li>
+    </ul>
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">
 			<br><br>
@@ -46,6 +48,7 @@
 	</div>
 
   	<div class="container ">
+		  
 		<div class="section">
 			<!--   Icon Section   -->
 			<div class="row">
@@ -127,33 +130,18 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		// $.ajax({
+		$('#logout').on('click', function(){
+			window.location='index.html';
+			localStorage.clear();
+		});
+		
+        $('#user-img').attr('src', 'img/'+localStorage.user_avatar);
+        $('#user-name').html(localStorage.user_name);
+        $('#user-email').html(localStorage.user_email);
 
-		// 	url: "http://localhost:8000/api/details",
-		// 	type: 'POST',
-		// 	dataType: "json",
-		// 	headers: {"Authorization": "Bearer " + localStorage.getItem('token')},
-		// 	success: function(data)
-		// 	{   
-		// 		console.log(data);
-		// 		// $.each(data, function(i,val){
-
-		// 		// 	console.log(val);
-		// 		// 	if(val['msg'] == 'Success'){
-
-		// 		// 		window.location='content/home.html';
-
-
-		// 		// 	}else{
-					
-		// 		// 		alert(data);
-		// 		// 	}
-
-		// 		// });
-					
-		// 	}
-		// });
-	
+		$("nav[data-includeHTML]").each(function () {                
+			$(this).load($(this).attr("data-includeHTML"));
+		});
 
 	});
 	

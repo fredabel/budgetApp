@@ -7,47 +7,39 @@
 
 		<!-- CSS  -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-		<link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	</head>
 	<body>
-		<nav class="light-blue lighten-1" role="navigation">
-			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Gravity</a>
-				<ul class="right hide-on-med-and-down">
-					<li><a href="../index.html">Login</a></li>
-					<li><a href="signup.html">Sign up</a></li>
-				</ul>
-	
-				<ul id="nav-mobile" class="sidenav">
-					<li><a href="../index.html">Login</a></li>
-					<li><a href="signup.html">Sign up</a></li>
-				</ul>
-				
-				<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-			</div>
-		</nav>
+		
+		<nav class="light-blue lighten-1" role="navigation" data-includeHTML="includes/header.html"></nav>
+		<ul id="nav-mobile" class="sidenav">
+			<li><a href="index.html">Login</a></li>
+			<li><a href="signup.html">Register</a></li>
+		</ul>
+
 		<div class="container">
 			<div class="section scrollspy">
 				<form class="col s10 form-box" id="signup-box" method="post" >
 					<div class="row" >
-						<div class="input-field col s12 m4">
+						<div class="input-field col s12 m6">
 							<input  id="name" type="text" name="name" class="validate" autofocus required>
 							<label for="name">Name</label>
 						</div>
-						<div class="input-field col s12 m4">
+						<div class="input-field col s12 m6">
 							<input  id="email" type="email" name="email" class="validate" autofocus required>
 							<label for="email">Email</label>
 						</div>
-						<div class="input-field col s12 m4">
+						<div class="input-field col s12 m12">
 							<input id="password" type="password" name="password" class="validate" autofocus required>
 							<label for="password">Password</label>
 						</div>
-						<div class="input-field col s12 m4">
+						<div class="input-field col s12 m12">
 							<input id="c_password" type="password" name="c_password" class="validate" autofocus required>
 							<label for="c_password">Confirm Password</label>
 						</div>
 						<div class="col s12 m12">
-							<button class="waves-effect waves-light btn-small right" id="register-btn" type="submit">Register</button>
+							<button class="waves-effect waves-light btn-small right" id="register-btn" type="submit">Submit</button>
 						</div>
 						
 					</div>
@@ -58,20 +50,23 @@
 	
 
 	<!--  Scripts-->
-	<script src="../js/jquery.js"></script>
-	<script src="../js/materialize.js"></script>
-	<script src="../js/init.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
 
   </body>
   <script type="text/javascript">
 	$(document).ready(function(){
+		$("nav[data-includeHTML]").each(function () {                
+			$(this).load($(this).attr("data-includeHTML"));
+		});
 		$('.scrollspy').scrollSpy();
 
 		$("form").on('submit',(function(e){
             e.preventDefault();
 
             $.ajax({
-                url: "http://localhost:8000/api/register",
+                url: "http://10.196.43.160:80/api/register",
                 type: "POST",
                 data:  new FormData(this),
                 contentType: false,

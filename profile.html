@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta  charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>Materialize</title>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+	<nav class="blue darken-4" role="navigation" data-includeHTML="includes/user-header.html"> </nav>
+	<ul id="nav-mobile" class="collection with-header sidenav">
+            
+		<li><a href="home.html" class="collection-item">Home</a></li>
+				
+	</ul>
+	
+
+  
+
+
+
+	<!--  Scripts-->
+	<script src="js/jquery.js"></script>
+	<script src="js/materialize.js"></script>
+	<script src="js/init.js"></script>
+
+
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+        $('#user-img').attr('src', 'img/'+localStorage.user_avatar);
+        $('#user-name').html(localStorage.user_name);
+        $('#user-email').html(localStorage.user_email);
+
+		$("nav[data-includeHTML]").each(function () {                
+			$(this).load($(this).attr("data-includeHTML"));
+		});
+
+	});
+	
+  </script>
+</html>

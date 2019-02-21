@@ -1,0 +1,45 @@
+
+<div class="nav-wrapper ">
+    <a href="dashboard.html" class="brand-logo center">
+        Dashboard
+    </a>
+    <ul class="right hide-on-med-and-down">
+        <li>
+            <a href="profile.html" class="row">
+                <div class="col s6">
+                    <img id="user-img" src="" class="circle responsive-img " alt="" width="60" height="50"> 
+                </div>
+                <div class="col s6">
+                    <span class="white-text" >
+                        <b id="user-name"></b>
+                    </span>
+                </div>    
+            </a>
+        </li>
+    </ul>
+    <ul class="hide-on-med-and-down">
+
+        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html">Home</a></li>
+      
+        <!-- <li><a href="index.html">Logout</a></li> -->
+    </ul> 
+    <a  href="#" data-target="nav-mobile" class="left-align sidenav-trigger ">
+        <i class="material-icons">menu</i>
+    </a>
+</div>
+
+<script>
+    // get the auth user
+    
+
+        $('#user-img').attr('src', './img/'+localStorage.user_avatar);
+        $('#user-name').html(localStorage.user_name);
+
+   
+
+  
+</script>
+
+
