@@ -14,67 +14,247 @@
 	<nav class="light-blue darken-4" role="navigation">
 		<div class="nav-wrapper">
 			<a id="logo-container" href="#" class="brand-logo center"></a>
-			
-			<ul class="right hide-on-med-and-down">
-				<li><a href="index.html">Login</a></li>
-				<li><a href="signup.html">Register</a></li>
-			</ul>
-		
-			<a href="javascript:history.back()" class="sidenav-trigger">Back</a>
-			
+			<a href="javascript:history.back()" class="sidenav-trigger show-on-large">Back</a>
 		</div>
-
 	</nav>
-	
-		
-	
 	<div class="row">
-		<div class="col s12 m6">
+		<div class="col s12 m6 offset-m3">
 			<div class="card">
-			<div class="card-image">
-				<img id="auth-img" src="">
-				<span id="auth-name" class="card-title"></span>
-				<a class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">edit</i></a>
-			</div>
-			<div class="card-content">
-				<p id="auth-email"></p>
-			</div>
+				<div class="card-image">
+					<img id="auth-img" src=""/>
+					<span id="auth-name" class="card-title"></span>
+					<a class="btn-floating halfway-fab waves-effect waves-light blue activator" ><i class="material-icons">edit</i></a>
+				</div>
+				<div class="card-content">
 		
-			</div>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non laborum nam dicta sit, facilis impedit repellat obcaecati eligendi magnam minus?</p>
+
+				</div>
+				<ul class="collection ul-profile">
+					<li class="collection-item"></li>
+					<li class="collection-item"><span>Email</span> <a href="" class="right"><b id="auth-email"></b></a></li>
+					<li class="collection-item"></li>
+					<li class="collection-item">
+						<span>Status</span>
+						<div class="switch right">
+							<label>
+								<input id="status" type="checkbox" />
+								<span class="lever"></span>
+							</label>
+						</div>
+					</li>
+				</ul>
+				<div class="card-reveal">
+					<form method="post" id="edit-form" class="center">
+						<span class="card-title grey-text text-darken-4">Edit Profile<i class="material-icons right">close</i></span>
+						<div class="card-image ">
+							<img id="edit-img" src="" height="250" width="200">
+							<div class="file-field input-field">
+								<span class="btn-small blue lighten-4s choose-file" id="choose-profile" >Choose</span>
+								<input type="file" name="user-profile" onchange="readURL(this);" >
 		
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text">
+								</div>
+							</div>
+						</div>
+						<div class="row edit-input">
+							<div class="input-field col s12">
+								<input value="" id="edit-name" name="edit-name" type="text" class="validate" autofocus>
+								<label class="active" for="edit-name">Name</label>
+							</div>
+							<div class="input-field col s12">
+								<input value="" id="edit-email" name="edit-email" type="text" class="validate" autofocus>
+								<label class="active" for="edit-email">Email</label>
+							</div>
+							<div class="input-field col s12">
+								<input value="" id="edit-password" name="edit-password" type="password" class="validate" autofocus>
+								<label class="active" for="edit-password">Password</label>
+							</div>
+							<div class="input-field col s12">
+								<input value="" id="c_password" name="c_password" type="password" class="validate" autofocus>
+								<label class="active" for="c_password">Confirm Password</label>
+							</div>
+							<br>
+						
+							
+						</div>
+						<button class="waves-effect waves-light btn-small right" id="update-btn" type="submit">Update</button>
+						<br>
+					
+					</form>
+				
+		
+				</div>
+				<div class="card-action center" id="status-section">
+					
+				</div>
+			</div>
 		</div>
 	</div>
-	<ul class="collection">
-		<li class="collection-item center-align ">
-			<a href="#" id="logout" class=" waves-effect waves-light btn  red darken-2">Logout</a>		
-		</li>
-	</ul>
-	
 
-  
-
-
+	<!-- delete option -->
+	<div id="modal1" class="modal ">
+		<div class="modal-content">
+			<i class="material-icons">warning</i>
+			<p >Do you want to delete your account?</p>
+			<b class="" id="delete-user"></b>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-close waves-effect waves-green btn-small ">No</a>
+			<a href="#!" class="modal-close waves-effect waves-green btn-small red " id="delete-confirm" >Sure</a>
+		</div>
+	</div>
 
 	<!--  Scripts-->
 	<script src="js/jquery.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/init.js"></script>
 
-
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
 
-        $('#auth-img').attr('src', 'img/'+localStorage.user_avatar);
-        $('#auth-name').html(localStorage.user_name);
-		$('#auth-email').html(localStorage.user_email);
+		//delete option
+		$('.modal').modal();
 		
-		$('#logout').on('click', function(){
-			window.location='index.html';
-			localStorage.clear();
+		/* $('#logout').on('click', function(){
+				window.location='index.html';
+				localStorage.clear();
+		 	});
+		*/
+
+		//show profile
+		$.ajax({
+
+			url: "http://10.196.43.160:80/api/details",
+			type: 'POST',
+			dataType: "json",
+			headers: {
+				"Authorization": "Bearer " + localStorage.token
+
+			},
+			success: function(data)
+			{   
+				console.log(data)
+				$.each(data, function(index, val){
+
+					$('#auth-img').attr('src', 'img/'+val.avatar);
+					$('#auth-name').html(val.name);
+					$('#auth-email').html(val.email);
+					if(val.status === 'active'){
+						$("input[type=checkbox]").prop('checked', true);
+					}
+
+					password = val.password.substring(0,10);
+
+					//for edit section
+					$('#edit-img').attr('src', 'img/'+val.avatar);
+					$('#edit-name').val(val.name)
+					$('#edit-email').val(val.email)
+					$('#edit-password').val(password)
+					$('#c_password').val(password)
+
+
+					if(val.status == 'active'){
+
+						$('#status-section').wrapInner('<a class="waves-effect waves-light btn center red darken-3 modal-trigger" id="del-btn" href="#modal1">Deactivate</a>');
+
+					}else{
+
+						$('#status-section').wrapInner('<a class="waves-effect waves-light btn center red darken-1 ">Activate your account</a>');
+
+					}
+
+					//for delete section
+					$('#delete-user').html(val.name)
+
+					
+				});
+			
+					
+			}
 		});
 
+
+		
+
+
+		// edit profile
+		$("#edit-form").on('submit',(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                url: "http://10.196.43.160:80/api/update/"+localStorage.user_id,
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                beforeSend: function()
+                {   
+
+					if($('#edit-name').val() == ""){
+
+						M.toast({html: 'Name field is empty', classes: 'btn red'})
+
+					}
+					if($('#edit-email').val() == ""){
+
+						M.toast({html: 'Email field is empty', classes: 'btn red'})
+					}
+
+					if($('#password').val() == ""){
+
+						M.toast({html: 'Password field is empty', classes: 'btn red'})
+					}
+					if($('#edit-password').val() !== $('#c_password').val()){
+
+						M.toast({html: 'Password not match', classes: 'btn red'})
+					}
+					
+                   
+                },
+                success: function(data)
+                {   
+                   	if(data['success'] == 'Success'){
+
+						M.toast({html: 'Update Success!', classes: 'btn green lighten-3', activationPercent: 5})
+
+				   	}
+                }
+
+            });
+
+		}));
+		
+		$('#delete-confirm').on('click',function(){
+
+			// alert('dsasdasd');
+
+			$.post("http://10.196.43.160:80/api/delete/"+localStorage.user_id,{}, function(data){
+
+				console.log(data);
+
+			});
+
+		});
+
+		
+
 	});
+		//edit image
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#edit-img').attr('src', e.target.result).width(200).height(250);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
 	
   </script>
 </html>
