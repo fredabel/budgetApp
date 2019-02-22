@@ -11,11 +11,43 @@
 	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-	<nav class="blue darken-4" role="navigation" data-includeHTML="includes/user-header.html"> </nav>
-	<ul id="nav-mobile" class="collection with-header sidenav">
-            
-		<li><a href="home.html" class="collection-item">Home</a></li>
-				
+	<nav class="light-blue darken-4" role="navigation">
+		<div class="nav-wrapper">
+			<a id="logo-container" href="#" class="brand-logo center"></a>
+			
+			<ul class="right hide-on-med-and-down">
+				<li><a href="index.html">Login</a></li>
+				<li><a href="signup.html">Register</a></li>
+			</ul>
+		
+			<a href="javascript:history.back()" class="sidenav-trigger">Back</a>
+			
+		</div>
+
+	</nav>
+	
+		
+	
+	<div class="row">
+		<div class="col s12 m6">
+			<div class="card">
+			<div class="card-image">
+				<img id="auth-img" src="">
+				<span id="auth-name" class="card-title"></span>
+				<a class="btn-floating halfway-fab waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+			</div>
+			<div class="card-content">
+				<p id="auth-email"></p>
+			</div>
+		
+			</div>
+		
+		</div>
+	</div>
+	<ul class="collection">
+		<li class="collection-item center-align ">
+			<a href="#" id="logout" class=" waves-effect waves-light btn  red darken-2">Logout</a>		
+		</li>
 	</ul>
 	
 
@@ -33,12 +65,13 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-        $('#user-img').attr('src', 'img/'+localStorage.user_avatar);
-        $('#user-name').html(localStorage.user_name);
-        $('#user-email').html(localStorage.user_email);
-
-		$("nav[data-includeHTML]").each(function () {                
-			$(this).load($(this).attr("data-includeHTML"));
+        $('#auth-img').attr('src', 'img/'+localStorage.user_avatar);
+        $('#auth-name').html(localStorage.user_name);
+		$('#auth-email').html(localStorage.user_email);
+		
+		$('#logout').on('click', function(){
+			window.location='index.html';
+			localStorage.clear();
 		});
 
 	});

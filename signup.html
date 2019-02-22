@@ -18,34 +18,45 @@
 			<li><a href="signup.html">Register</a></li>
 		</ul>
 
-		<div class="container">
-			<div class="section scrollspy">
-				<form class="col s10 form-box" id="signup-box" method="post" >
-					<div class="row" >
-						<div class="input-field col s12 m6">
-							<input  id="name" type="text" name="name" class="validate" autofocus required>
-							<label for="name">Name</label>
+		<div class="row ">
+				<form class="form-box">
+					<div class="col s12 m6 offset-m3">
+						<div class="card forms">
+							<div class="card-content ">
+								<span class="card-title">Register</span>
+								<div class="row ">
+									<br><br>
+									<div class="input-field col s12 m6">
+											<input  id="name" type="text" name="name" class="validate" autofocus required>
+											<label for="name">Name</label>
+									</div>
+									<div class="input-field col s12 m6">
+										<input  id="email" type="email" name="email" class="validate" autofocus required>
+										<label for="email">Email</label>
+									</div>
+									<div class="input-field col s12 m12">
+										<input id="password" type="password" name="password" class="validate" autofocus required>
+										<label for="password">Password</label>
+									</div>
+									<div class="input-field col s12 m12">
+										<input id="c_password" type="password" name="c_password" class="validate" autofocus required>
+										<label for="c_password">Confirm Password</label>
+									</div>
+										
+								</div>		
+							</div>
+							<div class="card-action">
+								<div class="row">
+									<button class="waves-effect waves-light btn-small right" id="register-btn" type="submit">Submit</button>
+								</div>
+									
+							</div>
 						</div>
-						<div class="input-field col s12 m6">
-							<input  id="email" type="email" name="email" class="validate" autofocus required>
-							<label for="email">Email</label>
-						</div>
-						<div class="input-field col s12 m12">
-							<input id="password" type="password" name="password" class="validate" autofocus required>
-							<label for="password">Password</label>
-						</div>
-						<div class="input-field col s12 m12">
-							<input id="c_password" type="password" name="c_password" class="validate" autofocus required>
-							<label for="c_password">Confirm Password</label>
-						</div>
-						<div class="col s12 m12">
-							<button class="waves-effect waves-light btn-small right" id="register-btn" type="submit">Submit</button>
-						</div>
-						
 					</div>
 				</form>
 			</div>
-		</div>
+
+	
 	
 	
 
